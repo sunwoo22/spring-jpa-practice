@@ -1,10 +1,14 @@
 package com.fastcampas.jpa.bookmanager.repository;
 
+import com.fastcampas.jpa.bookmanager.domain.Gender;
 import com.fastcampas.jpa.bookmanager.domain.User;
+import com.fastcampas.jpa.bookmanager.domain.UserHistory;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
@@ -14,13 +18,31 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 
 @SpringBootTest
 class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserHistoryRepository userHistoryRepository;
 
+    @Test
+    void userHistoryTest() {
+        User user = new User();
+        user.setName("abcd");
+        user.setEmail("abcd@fastcampus.com");
+
+        userRepository.save(user);
+
+        user.setName("abcd-new");
+
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
+    }
 
     @Test
     void select() {
@@ -85,7 +107,74 @@ class UserRepositoryTest {
         System.out.println("findByNameWithPaging : " + userRepository.findByName("aaa", PageRequest.of(1, 1, Sort.by(Order.desc("id")))).getTotalElements());
     }
 
-    
+    @Test
+    void insertAndUpdateTest() {
+        User user = new User();
+        user.setName("aaa");
+        user.setEmail("aaab@fastcampus.com");
+
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("aaaaaaab");
+
+        userRepository.save(user2);
+    }
+
+    @Test
+    void enumTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+
+        userRepository.findAll().forEach(System.out::println);
+
+        System.out.println(userRepository.findRawRecord().get("gender"));
+    }
+
+    @Test
+    void listenerTest() {
+        User user = new User();
+        user.setName("abcd");
+        user.setEmail("abcd@fastcampus.com");
+
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("abcdeee");
+
+        userRepository.save(user2);
+
+        userRepository.deleteById(4L);
+    }
+
+    @Test
+    void prePersistTest() {
+        User user = new User();
+        user.setName("abcd");
+        user.setEmail("abcd@fastcampus.com");
+//        user.setCreatedAt(LocalDateTime.now());
+//        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        System.out.println(userRepository.findByEmail("abcd@fastcampus.com"));
+    }
+
+    @Test
+    void preUpdateTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+        System.out.println("as-is : " + user);
+
+        user.setName("abcdeee");
+        userRepository.save(user);
+
+        System.out.println("to-be : " + userRepository.findAll().get(0));
+    }
+
+
 
     @Test
     void crud() {

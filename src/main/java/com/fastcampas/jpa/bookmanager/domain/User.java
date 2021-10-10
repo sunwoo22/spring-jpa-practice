@@ -18,7 +18,9 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @Entity
-public class User extends BaseEntity {
+@EntityListeners(value = {UserEntityListener.class})
+//@Table(name = "user", indexes = {@Index(columnList = "name")}, uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+public class User extends BaseEntity implements Auditable {
 
     @Id
     @GeneratedValue
