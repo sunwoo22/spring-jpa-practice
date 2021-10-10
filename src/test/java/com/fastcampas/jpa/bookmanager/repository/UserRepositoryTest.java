@@ -30,6 +30,36 @@ class UserRepositoryTest {
     private UserHistoryRepository userHistoryRepository;
 
     @Test
+<<<<<<< HEAD
+    void userRelationTest() {
+        User user = new User();
+        user.setName("david");
+        user.setEmail("david@fastcampus.com");
+        user.setGender(Gender.MALE);
+        userRepository.save(user);
+
+        user.setName("daniel");
+        userRepository.save(user);
+
+        user.setEmail("daniel@fastcampus.com");
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
+
+//        List<UserHistory> result = userHistoryRepository.findByUserId(
+//                userRepository.findByEmail("daniel@fastcampus.com").getId());
+
+        List<UserHistory> result = userRepository.findByEmail(
+                "daniel@fastcampus.com").getUserHistories();
+
+        result.forEach(System.out::println);
+
+        System.out.println("UserHistory.getUser() : " + userHistoryRepository.findAll().get(0).getUser());
+    }
+
+    @Test
+=======
+>>>>>>> 031853dd75e73a8d6cdb61621a47ac76c60b4215
     void userHistoryTest() {
         User user = new User();
         user.setName("abcd");

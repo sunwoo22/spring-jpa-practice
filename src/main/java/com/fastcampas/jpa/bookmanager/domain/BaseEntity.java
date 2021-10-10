@@ -13,7 +13,11 @@ import java.time.LocalDateTime;
 @Data
 @MappedSuperclass
 @EntityListeners(value = AuditingEntityListener.class)
+<<<<<<< HEAD
+public class BaseEntity implements Auditable {
+=======
 public class BaseEntity {
+>>>>>>> 031853dd75e73a8d6cdb61621a47ac76c60b4215
 
     @CreatedDate
     private LocalDateTime createdAt;
