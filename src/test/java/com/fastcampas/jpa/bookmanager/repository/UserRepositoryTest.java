@@ -7,21 +7,18 @@ import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 
 @SpringBootTest
+@Transactional
 class UserRepositoryTest {
 
     @Autowired
@@ -30,7 +27,6 @@ class UserRepositoryTest {
     private UserHistoryRepository userHistoryRepository;
 
     @Test
-<<<<<<< HEAD
     void userRelationTest() {
         User user = new User();
         user.setName("david");
@@ -58,8 +54,6 @@ class UserRepositoryTest {
     }
 
     @Test
-=======
->>>>>>> 031853dd75e73a8d6cdb61621a47ac76c60b4215
     void userHistoryTest() {
         User user = new User();
         user.setName("abcd");

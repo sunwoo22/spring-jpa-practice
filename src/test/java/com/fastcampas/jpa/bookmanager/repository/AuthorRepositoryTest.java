@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 
 @SpringBootTest
-public class AuthorRepositoryTest {
+class AuthorRepositoryTest {
 
     @Autowired
     private AuthorRepository authorRepository;
