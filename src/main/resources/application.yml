@@ -19,3 +19,6 @@ spring:
     sql-script-encoding: UTF-8
 server:
   port: 8070
+logging:
+  level:
+    root: trace
