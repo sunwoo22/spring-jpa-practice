@@ -6,8 +6,8 @@
 
 ![](https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white)
 ![](https://img.shields.io/badge/IntelliJ-000000?style=flat&logo=IntelliJIDEA&logoColor=white)
-![](https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white)
 ![](https://img.shields.io/badge/Gradle-02303A?style=flat&logo=Gradle&logoColor=white)
+![](https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white)
 ![](https://img.shields.io/badge/Hibernate-59666C?style=flat&logo=Hibernate&logoColor=white)
 ![](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white)
 <br>
